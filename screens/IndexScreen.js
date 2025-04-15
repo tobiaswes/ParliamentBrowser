@@ -11,7 +11,7 @@ const IndexScreen = ({ navigation }) => {
     >
       <View style={styles.overlay}>
         <Text style={styles.welcomeText}>
-          Välkommen till Parliment Browser för att söka efter nuvarande ålänska lagtingsledarmöter!
+          Välkommen till Parliment Browser för att se nuvarande ålänska lagtingsledarmöter!
         </Text>
         <Button
           title="Fortsätt"

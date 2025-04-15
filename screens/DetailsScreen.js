@@ -2,22 +2,31 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 
+import defaultImage from '../assets/Default.png';
+
 const DetailScreen = ({ route }) => {
   const { person } = route.params;
 
   return (
     <View style={styles.container}>
-      <Card style={styles.card}>
-        {person.image && person.image.url ? (
-          <Image source={{ uri: person.image.url }} style={styles.image} />
-        ) : null}
-        <Card.Content>
-          <Title>{person.first_name} {person.last_name}</Title>
-          <Paragraph>Födelsedatum: {person.birthday || 'Saknas'}</Paragraph>
-          <Paragraph>Adress: {person.address}</Paragraph>
-          <Paragraph>Kommun: {person.city}</Paragraph>
-        </Card.Content>
-      </Card>
+      <View style={styles.borderOuter}>
+        <View style={styles.borderMiddle}>
+          <View style={styles.borderInner}>
+            <Card style={styles.card}>
+              <Image
+                source={person.image?.url ? { uri: person.image.url } : defaultImage}
+                style={styles.image}
+              />
+              <Card.Content>
+                <Title>{person.first_name} {person.last_name}</Title>
+                <Paragraph>Födelsedatum: {person.birthday || 'Saknas'}</Paragraph>
+                <Paragraph>Adress: {person.address || 'Saknas'}</Paragraph>
+                <Paragraph>Kommun: {person.city || 'Saknas'}</Paragraph>
+              </Card.Content>
+            </Card>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -30,14 +39,32 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#fff',
   },
+  borderOuter: {
+    padding: 4,
+    backgroundColor: 'blue',
+    borderRadius: 16,
+    marginBottom: 10,
+  },
+  borderMiddle: {
+    padding: 2,
+    backgroundColor: 'yellow',
+    borderRadius: 14,
+  },
+  borderInner: {
+    padding: 2,
+    backgroundColor: 'red',
+    borderRadius: 12,
+  },
   card: {
     borderRadius: 12,
-    padding: 10,
+    overflow: 'hidden',
+    elevation: 3,
   },
   image: {
     width: '100%',
-    height: 250,
-    resizeMode: 'cover',
-    borderRadius: 12,
+    height: 420,
+    resizeMode: 'contain',
+    marginTop: 20,
   },
 });
+
